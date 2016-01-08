@@ -15,26 +15,34 @@ app.get('/', function(req, res){ //turn this into a route guide
 //set up uris
 app.listen(3000);
 
-var menuUri = "/menu";
+var menuEndpoint = "/menu";
 
-var drinksUri = "/drinks";
+var drinksEndpoint = "/drinks";
 
-var extrasUri = "/extras";
+var extrasEndpoint = "/extras";
 
-var ordersUri = "/orders";
+var ordersEndpoint = "/orders";
 
-//do the routing
-app.route(drinksUri)
+//drinks with no uri
+app.route(drinksEndpoint)
 .get(function(req, res){
 	res.send(drinksController.getDrinks());
-
 })
 .post(function(req, res){
-	res.send(drinksController.addADrink("stuff should go here"));
-})
-.put(function(req, res){
-	res.send(drinksController.updateADrink("stuff should also go here"));
+	res.send(drinksController.addADrink("body should go here"));
 })
 .delete(function(req, res){
-	res.send(drinksController.deleteADrink("stuff should also also go here"));
+	res.send(drinksController.deleteDrinks());
 });
+
+//drinks with uri
+app.route(drinksEndpoint+"/:drinkId")
+.get(function(req, res){
+	res.send(drinksController.getADrink(req.params.drinkId));
+})
+.put(function(req, res){
+	res.send(drinksController.updateADrink(req.params.drinkId, "body should go here"));
+})
+.delete(function(req, res){
+	res.send(drinksController.deleteADrink(req.params.drinkId));
+})

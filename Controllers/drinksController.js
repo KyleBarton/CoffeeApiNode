@@ -1,18 +1,24 @@
+var drinkRepositoryProto = require("../DataAccess/drinkRepository.js");
+var drinkRepository = Object.create(drinkRepositoryProto);
+
 var drinksController = {
 	getDrinks: function(){
-		return "getting all drinks from the controller";
+		return drinkRepository.getAllDrinks();
+	},
+	deleteDrinks: function(){
+		return drinkRepository.deleteAllDrinks();
 	},
 	addADrink: function(drink){
-		return "adding a drink from the controller";
+		return drinkRepository.addDrink(drink);
 	},
-	updateADrink: function(drink){
-		return "updating a drink from the controller";
+	updateADrink: function(drinkId, drink){
+		return drinkRepository.changeDrink(drinkId, drink);
 	},
 	deleteADrink: function(drinkId){
-		return "deleting a drink from the controller";
+		return drinkRepository.deleteDrink(drinkId);
 	},
 	getADrink: function(drinkId){
-		return "getting a specific drink from the controller";
+		return drinkRepository.getDrink(drinkId);
 	}
 };
 
