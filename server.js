@@ -29,7 +29,11 @@ app.route(drinksEndpoint)
 	res.send(drinksController.getDrinks());
 })
 .post(function(req, res){
-	res.send(drinksController.addADrink("body should go here"));
+	console.log(req);
+	// console.log(req.body);
+	// var drink = Object.create(drinkModel);
+	// drink.init(req.body);
+	// res.send(drinksController.addADrink(req.body));
 })
 .delete(function(req, res){
 	res.send(drinksController.deleteDrinks());
@@ -41,7 +45,7 @@ app.route(drinksEndpoint+"/:drinkId")
 	res.send(drinksController.getADrink(req.params.drinkId));
 })
 .put(function(req, res){
-	res.send(drinksController.updateADrink(req.params.drinkId, "body should go here"));
+	res.send(drinksController.updateADrink(req.params.drinkId, req.body));
 })
 .delete(function(req, res){
 	res.send(drinksController.deleteADrink(req.params.drinkId));

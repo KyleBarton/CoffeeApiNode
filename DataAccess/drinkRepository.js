@@ -5,7 +5,7 @@ var drinkRepository = {
 		return drinkId;
 	},
 	addDrink: function(drink){
-		return drink;
+		return {"drink": drink};
 	},
 	changeDrink: function(drinkId, drink){
 		return {drinkId, drink};
