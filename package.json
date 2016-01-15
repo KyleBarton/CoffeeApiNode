@@ -1,5 +1,7 @@
 {
 	"devDependencies": {
-		"express": "*"
+		"express": "*",
+		"body-parser": "*",
+		"mongodb": "*"
 	}
 }
