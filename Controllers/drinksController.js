@@ -8,8 +8,11 @@ var drinksController = {
 	deleteDrinks: function(){
 		return drinkRepository.deleteAllDrinks();
 	},
-	addADrink: function(drink){
-		return drinkRepository.addDrink(drink);
+	addADrink: function(drink, callBack){
+		drinkRepository.addDrink(drink, function(err, id){
+			drink.drinkId = id;
+			callBack(null,drink);
+		});
 	},
 	updateADrink: function(drinkId, drink){
 		return drinkRepository.changeDrink(drinkId, drink);

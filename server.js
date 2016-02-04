@@ -28,22 +28,20 @@ var ordersEndpoint = "/orders";
 
 //drinks with no uri
 app.route(drinksEndpoint)
-
 .get(function(req, res){
 
 	res.send(drinksController.getDrinks());
 
 })
-
 .post(function(req, res){
 
 	var drink = Object.create(drinkModel);
 	drink.init(req.body);
 
-	res.send(drinksController.addADrink(drink));
-
+	drinksController.addADrink(drink, function(err, drink){
+		res.send(drink);
+	})
 })
-
 .delete(function(req, res){
 
 	res.send(drinksController.deleteDrinks());

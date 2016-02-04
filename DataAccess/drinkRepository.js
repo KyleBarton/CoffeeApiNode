@@ -1,27 +1,27 @@
-//Drink Repository
+var mongoClient = require('mongodb').MongoClient;
 
 var drinkRepository = {
 	getDrink: function(drinkId){
 		return drinkId;
 	},
-	addDrink: function(drink){
-		var mongoClient = require('mongodb').MongoClient;
+	addDrink: function(drink, callBack){
+
 		var url = 'mongodb://localhost:27017/CoffeeApi';
 		mongoClient.connect(url, function(err, db){
 			if (err){
 				throw 'Could not connect to mongo database';
 			}
-			console.log(drink);
-			console.log('successfully connected.');
-			db.collection('Drinks').save(drink, function(err, record){
-				console.log(record);
+			db.collection('Drinks').insertOne(drink, function(err, record){
+				callBack(null, record.insertedId);
+				db.close();
+
 			});
-			db.close();
+			
 		})
 		return {"drink": drink};
 	},
 	changeDrink: function(drinkId, drink){
-		return {drinkId, drink};
+		return {'drinkId': drinkId, 'drink': drink};
 	},
 	deleteDrink: function(drinkId){
 		return drinkId;
